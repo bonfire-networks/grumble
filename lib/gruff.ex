@@ -14,7 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 defmodule Gruff do
-  alias Gruff.{Arg, Field, Query, Param, Type, Var}
+  alias Gruff.{
+    Arg,
+    Field,
+    FragmentSpread,
+    ObjectSpread,
+    Query,
+    Param,
+    Type,
+    Var,
+  }
 
   @type name :: :atom | :binary
 
@@ -25,9 +34,16 @@ defmodule Gruff do
   @spec field(name :: name, set :: list) :: Field.t()
   def field(name, set \\ []), do: Field.new(name, set)
 
+  @spec fragment_spread(name :: name) :: FragmentSpread.t
+  def fragment_spread(name), do: FragmentSpread.new(name)
+
   @spec mutation() :: Query.t()
   @spec mutation(set :: list) :: Query.t()
   def mutation(set \\ []), do: Query.new(:mutation, set)
+
+  @spec object_spread(name :: name) :: ObjectSpread.t
+  @spec object_spread(name :: name, set :: list) :: ObjectSpread.t
+  def object_spread(name, set \\ []), do: ObjectSpread.new(name, set)
 
   @spec param(name :: name, type :: Type.t()) :: Param.t()
   def param(name, type), do: Param.new(name, type)
@@ -59,11 +75,6 @@ end
 # defmodule Gruff.FragmentDef do
 #   @enforce_keys [:name, :type]
 #   defstruct [directives: [], fields: [], @enforce_keys]
-# end
-
-# defmodule Gruff.FragmentSpread do
-#   @enforce_keys [:name]
-#   defstruct [directives: [], @enforce_keys]
 # end
 
 # defmodule Gruff.InlineFragment do

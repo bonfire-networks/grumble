@@ -15,7 +15,16 @@
 # limitations under the License.
 defmodule Gruff.PP do
   # Directive, FragmentDef, FragmentSpread, FragmentItem
-  alias Gruff.{Arg, Field, Query, Param, Type, Var}
+  alias Gruff.{
+    Arg,
+    Field,
+    FragmentSpread,
+    ObjectSpread,
+    Param,
+    Query,
+    Type,
+    Var,
+  }
   import Gruff.Helpers
 
   def to_string(thing), do: :erlang.iolist_to_binary(to_iolist(thing))
@@ -27,6 +36,8 @@ defmodule Gruff.PP do
   def to_iolist(list, indent) when is_list(list), do: list(list, indent)
   def to_iolist(%Arg{} = arg, indent), do: arg(arg, indent)
   def to_iolist(%Field{} = field, indent), do: field(field, indent)
+  def to_iolist(%FragmentSpread{} = field, indent), do: field(field, indent)
+  def to_iolist(%ObjectSpread{} = field, indent), do: field(field, indent)
   def to_iolist(%Query{} = query, indent), do: query(query, indent)
   def to_iolist(%Param{} = param, indent), do: param(param, indent)
   def to_iolist(%Type{} = type, indent), do: type(type, indent)
@@ -66,6 +77,9 @@ defmodule Gruff.PP do
     [alia(alia), field_name(name), args(args, indent), fields(fields, indent)]
   end
 
+  defp field(%FragmentSpread{}=field, indent), do: fragment_spread(field, indent)
+  defp field(%ObjectSpread{}=field, indent), do: object_spread(field, indent)
+
   defp field_name(:__typename), do: "__typename"
   defp field_name(other), do: field_case(other)
 
@@ -78,6 +92,15 @@ defmodule Gruff.PP do
   defp fields(fields, indent) when is_list(fields) do
     ind = ind(indent)
     [" {\n", Enum.map(fields, &[ind, field(&1, ind), "\n"]), indent, "}"]
+  end
+
+  # no space
+  defp fragment_spread(%FragmentSpread{name: name}, _) do
+    ["...", field_case(name)]
+  end
+
+  defp object_spread(%ObjectSpread{name: name, fields: fields}, indent) do
+    ["... on ", type(name, indent), fields(fields, indent)]
   end
 
   # no surrounding space
