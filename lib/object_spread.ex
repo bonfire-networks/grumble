@@ -62,4 +62,8 @@ defmodule Gruff.ObjectSpread do
     %{self | fields: [Field.new(field) | fields]}
   end
 
+  def set(%ObjectSpread{} = self, :fields, fields) when is_list(fields) do
+    Enum.reduce(fields, self, &set(&2, :field, &1))
+  end
+
 end
