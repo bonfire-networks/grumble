@@ -19,7 +19,7 @@ defmodule Gruff.Field do
   defstruct [:name, alias: nil, args: [], fields: []]
 
   import Gruff.Helpers, only: [name?: 1, validate: 3]
-  alias Gruff.{Field, Arg}
+  alias Gruff.{Arg, Field, FragmentSpread, ObjectSpread}
 
   @type name :: atom | binary
 
@@ -57,6 +57,14 @@ defmodule Gruff.Field do
   end
 
   def set(%Field{fields: fields} = field, :field, %Field{} = new) do
+    %{field | fields: [new | fields]}
+  end
+
+  def set(%Field{fields: fields} = field, :field, %FragmentSpread{} = new) do
+    %{field | fields: [new | fields]}
+  end
+
+  def set(%Field{fields: fields} = field, :field, %ObjectSpread{} = new) do
     %{field | fields: [new | fields]}
   end
 

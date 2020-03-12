@@ -19,7 +19,7 @@ defmodule Gruff.Query do
   defstruct [:operation, name: nil, params: [], fields: []]
 
   import Gruff.Helpers, only: [name?: 1, operation?: 1, validate: 3]
-  alias Gruff.{Field, Query, Param}
+  alias Gruff.{Field, FragmentSpread, ObjectSpread, Param, Query}
 
   @type name :: atom | binary
 
@@ -63,6 +63,14 @@ defmodule Gruff.Query do
   end
 
   def set(%Query{fields: fields} = query, :field, %Field{} = field) do
+    %{query | fields: [field | fields]}
+  end
+
+  def set(%Query{fields: fields} = query, :field, %FragmentSpread{} = field) do
+    %{query | fields: [field | fields]}
+  end
+
+  def set(%Query{fields: fields} = query, :field, %ObjectSpread{} = field) do
     %{query | fields: [field | fields]}
   end
 
