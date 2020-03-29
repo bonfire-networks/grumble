@@ -1,4 +1,4 @@
-# Gruff
+# Grumble
 
 A DSL for generating GraphQL queries
 
@@ -12,14 +12,14 @@ A DSL for generating GraphQL queries
 Add to your deps:
 
 ```elixir
-{:gruff, "~> 0.1.0"}
+{:grumble, "~> 0.1.0"}
 ```
 
 Simple example:
 
 ```
-import Gruff
-alias Gruff.PP
+import Grumble
+alias Grumble.PP
 
 IO.puts(PP.to_string(
   query(

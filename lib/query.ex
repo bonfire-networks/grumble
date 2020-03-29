@@ -1,4 +1,4 @@
-# Gruff - a DSL for building GraphQL queries as data structures.
+# Grumble - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 
@@ -13,13 +13,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-defmodule Gruff.Query do
+defmodule Grumble.Query do
   @enforce_keys [:operation]
   # directives: []
   defstruct [:operation, name: nil, params: [], fields: []]
 
-  import Gruff.Helpers, only: [name?: 1, operation?: 1, validate: 3]
-  alias Gruff.{Field, FragmentSpread, ObjectSpread, Param, Query}
+  import Grumble.Helpers, only: [name?: 1, operation?: 1, validate: 3]
+  alias Grumble.{Field, FragmentSpread, ObjectSpread, Param, Query}
 
   @type name :: atom | binary
 

@@ -1,4 +1,4 @@
-# Gruff - a DSL for building GraphQL queries as data structures.
+# Grumble - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 
@@ -13,8 +13,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-defmodule Gruff do
-  alias Gruff.{
+defmodule Grumble do
+  alias Grumble.{
     Arg,
     Field,
     FragmentSpread,
@@ -72,20 +72,20 @@ defmodule Gruff do
   def var(name), do: Var.new(name)
 end
 
-# defmodule Gruff.FragmentDef do
+# defmodule Grumble.FragmentDef do
 #   @enforce_keys [:name, :type]
 #   defstruct [directives: [], fields: [], @enforce_keys]
 # end
 
-# defmodule Gruff.InlineFragment do
+# defmodule Grumble.InlineFragment do
 #   defstruct [:type, directives: [], fields: []]
 # end
 
-# defmodule Gruff.Directive do
+# defmodule Grumble.Directive do
 #   defstruct [:name, :value]
 #
-#   import Gruff.Helpers, only: [name?: 1, value?: 1, validate: 3]
-#   alias Gruff.{Arg, Directive, Helpers, Var}
+#   import Grumble.Helpers, only: [name?: 1, value?: 1, validate: 3]
+#   alias Grumble.{Arg, Directive, Helpers, Var}
 #
 #   def new(name, value)
 #     validate(&name?/1, name, :invalid_name)

@@ -1,4 +1,4 @@
-# Gruff - a DSL for building GraphQL queries as data structures.
+# Grumble - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 
@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-defmodule Gruff.PP do
+defmodule Grumble.PP do
   # Directive, FragmentDef, FragmentSpread, FragmentItem
-  alias Gruff.{
+  alias Grumble.{
     Arg,
     Field,
     FragmentSpread,
@@ -25,7 +25,7 @@ defmodule Gruff.PP do
     Type,
     Var,
   }
-  import Gruff.Helpers
+  import Grumble.Helpers
 
   def to_string(thing), do: :erlang.iolist_to_binary(to_iolist(thing))
 

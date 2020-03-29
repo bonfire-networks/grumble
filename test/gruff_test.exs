@@ -1,4 +1,4 @@
-# Gruff - a DSL for building GraphQL queries as data structures.
+# Grumble - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 
@@ -13,13 +13,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-defmodule GruffTest do
+defmodule GrumbleTest do
   use ExUnit.Case
 
-  # doctest Gruff
+  # doctest Grumble
 
-  import Gruff
-  alias Gruff.PP
+  import Grumble
+  alias Grumble.PP
 
   describe "pretty printing" do
     test "simple data" do

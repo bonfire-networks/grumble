@@ -1,4 +1,4 @@
-# Gruff - a DSL for building GraphQL queries as data structures.
+# Grumble - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 
@@ -13,12 +13,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-defmodule Gruff.MixProject do
+defmodule Grumble.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :gruff,
+      app: :grumble,
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
@@ -26,14 +26,14 @@ defmodule Gruff.MixProject do
         description: "A DSL for building GraphQL queries as data structures.",
         licenses: ["Apache 2"],
         links: %{
-          "Repository" => "https://github.com/irresponsible/gruff.ex",
-          "Hexdocs" => "https://hexdocs.pm/gruff"
+          "Repository" => "https://github.com/irresponsible/grumble.ex",
+          "Hexdocs" => "https://hexdocs.pm/grumble"
         }
       ],
       docs: [
-        name: "Gruff",
+        name: "Grumble",
         main: "readme",
-        source_url: "https://github.com/irresponsible/gruff.ex",
+        source_url: "https://github.com/irresponsible/grumble.ex",
         extras: [
           "README.md",
           "CONDUCT.md"
