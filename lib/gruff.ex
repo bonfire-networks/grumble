@@ -1,4 +1,4 @@
-# Gruff - a library for generating GraphQL queries
+# Gruff - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 

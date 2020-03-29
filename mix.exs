@@ -1,4 +1,4 @@
-# Gruff - a library for generating GraphQL queries
+# Gruff - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
 # 
@@ -22,9 +22,8 @@ defmodule Gruff.MixProject do
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps(),
-      elixirc_paths: elixirc_paths(Mix.env()),
       package: [
+        description: "A DSL for building GraphQL queries as data structures.",
         licenses: ["Apache 2"],
         links: %{
           "Repository" => "https://github.com/irresponsible/gruff.ex",
@@ -39,22 +38,12 @@ defmodule Gruff.MixProject do
           "README.md",
           "CONDUCT.md"
         ]
-      ]
+      ],
+      deps: [
+        {:recase, "~> 0.5"},
+        {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      ],
     ]
   end
 
-  def application do
-    [
-      extra_applications: [:logger]
-    ]
-  end
-
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
-
-  defp deps do
-    [
-      {:recase, "~> 0.5"}
-    ]
-  end
 end

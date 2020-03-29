@@ -2,19 +2,48 @@
 
 A DSL for generating GraphQL queries
 
-## Status: alpha
+## Status: beta
 
-* Was written in a hurry because I needed it for work:
-  * Needs (better) tests and documentation
-  * Best understood by just reading its code and noting the types
-* Missing: fragments, enums, schema definitions
+* Needs (better) tests and documentation.
+* Things are missing.
 
 ## Usage
 
 Add to your deps:
 
 ```elixir
-{:gruff, git: "https://github.com/irresponsible/gruff", branch: "master"}
+{:gruff, "~> 0.1.0"}
+```
+
+Simple example:
+
+```
+import Gruff
+alias Gruff.PP
+
+IO.puts(PP.to_string(
+  query(
+    params: [community_id: type!(:string)],
+    fields: [
+      field(
+        :community,
+        args: [community_id: var(:community_id)],
+        fields: [:id, :name]
+      )
+    ]
+  )
+))
+```
+
+Output:
+
+```
+query($communityId: String!) {
+  community(communityId: $communityId) {
+    name
+    id
+  }
+}
 ```
 
 ## Contributing
