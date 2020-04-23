@@ -4,8 +4,13 @@ A DSL for generating GraphQL queries
 
 ## Status: beta
 
+We use this in our tests at work to generate all the queries (because
+we outgrew string concatenation). I'm not sure I'd want to depend on
+it in production yet because it's hard to feel like it's had a proper
+stress testing.
+
 * Needs (better) tests and documentation.
-* Things are missing.
+* Missing support for some things we don't use.
 
 ## Usage
 
@@ -17,7 +22,7 @@ Add to your deps:
 
 Simple example:
 
-```
+```elixir
 import Grumble
 alias Grumble.PP
 
@@ -45,6 +50,13 @@ query($communityId: String!) {
   }
 }
 ```
+
+## Guide
+
+Most of the useful functions are in the `Grumble` module. From there
+you can read which arguments are understood by the relevant `new`
+function. We apologise for the poor documentation, please feel free to
+contribute better docs!
 
 ## Contributing
 
