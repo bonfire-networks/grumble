@@ -33,7 +33,7 @@ defmodule Grumble.MixProject do
       docs: [
         name: "Grumble",
         main: "readme",
-        source_url: "https://github.com/irresponsible/grumble.ex",
+        source_url: "https://github.com/commonspub/grumble",
         extras: [
           "README.md",
           "CONDUCT.md"
