@@ -25,6 +25,7 @@ defmodule Grumble.Helpers do
 
   @spec type_case(atom | binary) :: binary
   def type_case(name) when is_atom(name), do: type_case(Atom.to_string(name))
+  def type_case("id"), do: "ID"
   def type_case(name) when is_binary(name), do: Recase.to_pascal(name)
 
   @spec string_literal(binary) :: iolist
