@@ -20,13 +20,13 @@ defmodule Grumble.Helpers do
   @type predicate :: (term -> boolean)
 
   @spec field_case(atom | binary) :: binary
-  def field_case(name) when is_atom(name), do: field_case(Atom.to_string(name))
-  def field_case(name) when is_binary(name), do: Recase.to_camel(name)
+  def field_case(name) when is_binary(name), do: name
+  def field_case(name) when is_atom(name), do: Recase.to_camel(Atom.to_string(name))
 
   @spec type_case(atom | binary) :: binary
-  def type_case(name) when is_atom(name), do: type_case(Atom.to_string(name))
-  def type_case("id"), do: "ID"
-  def type_case(name) when is_binary(name), do: Recase.to_pascal(name)
+  def type_case(:id), do: "ID"
+  def type_case(name) when is_binary(name), do: name
+  def type_case(name) when is_atom(name), do: Recase.to_pascal(Atom.to_string(name))
 
   @spec string_literal(binary) :: iolist
   def string_literal(string), do: ["\"", escape_string(string, []), "\""]
