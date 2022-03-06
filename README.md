@@ -1,6 +1,6 @@
 # Grumble
 
-A DSL for generating GraphQL queries
+`Grumble` is a DSL for generating GraphQL queries
 
 ## Status: beta
 
