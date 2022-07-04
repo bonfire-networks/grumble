@@ -1,13 +1,13 @@
 # Grumble - a DSL for building GraphQL queries as data structures.
 #
 # Copyright (c) 2020 James Laver
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,14 +26,14 @@ defmodule Grumble.MixProject do
         description: "A DSL for building GraphQL queries as data structures.",
         licenses: ["Apache 2"],
         links: %{
-          "Repository" => "https://github.com/commonspub/grumble",
+          "Repository" => "https://github.com/bonfire-networks/grumble",
           "Hexdocs" => "https://hexdocs.pm/grumble"
         }
       ],
       docs: [
         name: "Grumble",
         main: "readme",
-        source_url: "https://github.com/commonspub/grumble",
+        source_url: "https://github.com/bonfire-networks/grumble",
         extras: [
           "README.md",
           "CONDUCT.md"
