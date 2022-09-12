@@ -29,5 +29,4 @@ defmodule Grumble.FragmentSpread do
     validate(&name?/1, name, :invalid_name)
     %FragmentSpread{name: name}
   end
-
 end

@@ -41,9 +41,8 @@ defmodule Grumble.MixProject do
       ],
       deps: [
         {:recase, "~> 0.5"},
-        {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      ],
+        {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      ]
     ]
   end
-
 end

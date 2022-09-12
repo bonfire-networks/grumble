@@ -21,12 +21,16 @@ defmodule Grumble.Helpers do
 
   @spec field_case(atom | binary) :: binary
   def field_case(name) when is_binary(name), do: name
-  def field_case(name) when is_atom(name), do: Recase.to_camel(Atom.to_string(name))
+
+  def field_case(name) when is_atom(name),
+    do: Recase.to_camel(Atom.to_string(name))
 
   @spec type_case(atom | binary) :: binary
   def type_case(:id), do: "ID"
   def type_case(name) when is_binary(name), do: name
-  def type_case(name) when is_atom(name), do: Recase.to_pascal(Atom.to_string(name))
+
+  def type_case(name) when is_atom(name),
+    do: Recase.to_pascal(Atom.to_string(name))
 
   @spec string_literal(binary) :: iolist
   def string_literal(string), do: ["\"", escape_string(string, []), "\""]
@@ -70,13 +74,19 @@ defmodule Grumble.Helpers do
   def value?(%{__struct__: Type}), do: false
 
   def value?(%{} = fields),
-    do: Enum.all?(Map.delete(fields, :__struct__), fn {k, v} -> name?(k) and value?(v) end)
+    do:
+      Enum.all?(Map.delete(fields, :__struct__), fn {k, v} ->
+        name?(k) and value?(v)
+      end)
 
   def value?(_), do: false
 
   @spec const_value?(term) :: boolean
   def const_value?(nil), do: true
-  def const_value?(x) when is_number(x) or is_boolean(x) or is_binary(x), do: true
+
+  def const_value?(x) when is_number(x) or is_boolean(x) or is_binary(x),
+    do: true
+
   def const_value?(x) when is_list(x), do: Enum.all?(x, &const_value?/1)
   def const_value?(%{__struct__: Arg}), do: false
   # def const_value?(%{__struct__: Directive}), do: false
@@ -90,7 +100,10 @@ defmodule Grumble.Helpers do
   def const_value?(%{__struct__: Type}), do: false
 
   def const_value?(%{} = x),
-    do: Enum.all?(Map.delete(x, :__struct__), fn {k, v} -> name?(k) and const_value?(v) end)
+    do:
+      Enum.all?(Map.delete(x, :__struct__), fn {k, v} ->
+        name?(k) and const_value?(v)
+      end)
 
   def const_value?(_), do: false
 
@@ -103,7 +116,9 @@ defmodule Grumble.Helpers do
 
   # does every char in a binary match a predicate?
   defp every?(_pred, ""), do: true
-  defp every?(pred, <<char::utf8, rest::binary>>), do: pred.(char) and every?(pred, rest)
+
+  defp every?(pred, <<char::utf8, rest::binary>>),
+    do: pred.(char) and every?(pred, rest)
 
   # find the first character that matches a predicate, get it and its byte offset and size
   defp first(str, pred), do: first(str, pred, 0)
@@ -157,7 +172,11 @@ defmodule Grumble.Helpers do
       {:ok, index, ch, size} ->
         pre = :binary.part(str, 0, index)
         ch = escape_char(ch)
-        escape_string(:binary.part(str, size, byte_size(str) - (size + index)), [acc, pre, ch])
+
+        escape_string(
+          :binary.part(str, size, byte_size(str) - (size + index)),
+          [acc, pre, ch]
+        )
     end
   end
 

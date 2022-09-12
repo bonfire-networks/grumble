@@ -23,16 +23,22 @@ defmodule Grumble.PP do
     Param,
     Query,
     Type,
-    Var,
+    Var
   }
+
   import Grumble.Helpers
 
   def to_string(thing), do: :erlang.iolist_to_binary(to_iolist(thing))
 
   def to_iolist(thing, indent \\ [])
   def to_iolist(nil, _indent), do: "null"
-  def to_iolist(string, _indent) when is_binary(string), do: string_literal(string)
-  def to_iolist(simple, _indent) when is_number(simple) or is_boolean(simple), do: "#{simple}"
+
+  def to_iolist(string, _indent) when is_binary(string),
+    do: string_literal(string)
+
+  def to_iolist(simple, _indent) when is_number(simple) or is_boolean(simple),
+    do: "#{simple}"
+
   def to_iolist(list, indent) when is_list(list), do: list(list, indent)
   def to_iolist(%Arg{} = arg, indent), do: arg(arg, indent)
   def to_iolist(%Field{} = field, indent), do: field(field, indent)
@@ -71,14 +77,20 @@ defmodule Grumble.PP do
   end
 
   # no surrounding space
-  defp field(name, _) when is_atom(name) or is_binary(name), do: field_name(name)
+  defp field(name, _) when is_atom(name) or is_binary(name),
+    do: field_name(name)
 
-  defp field(%Field{name: name, alias: alia, args: args, fields: fields}, indent) do
+  defp field(
+         %Field{name: name, alias: alia, args: args, fields: fields},
+         indent
+       ) do
     [alia(alia), field_name(name), args(args, indent), fields(fields, indent)]
   end
 
-  defp field(%FragmentSpread{}=field, indent), do: fragment_spread(field, indent)
-  defp field(%ObjectSpread{}=field, indent), do: object_spread(field, indent)
+  defp field(%FragmentSpread{} = field, indent),
+    do: fragment_spread(field, indent)
+
+  defp field(%ObjectSpread{} = field, indent), do: object_spread(field, indent)
 
   defp field_name(:__typename), do: "__typename"
   defp field_name(other), do: field_case(other)
@@ -112,7 +124,13 @@ defmodule Grumble.PP do
       "{}"
     else
       ind = ind(indent)
-      ["{\n", Enum.map(thing, &[ind, object_field(ind, &1), ",\n"]), indent, "}"]
+
+      [
+        "{\n",
+        Enum.map(thing, &[ind, object_field(ind, &1), ",\n"]),
+        indent,
+        "}"
+      ]
     end
   end
 
@@ -144,7 +162,10 @@ defmodule Grumble.PP do
   end
 
   # no surrounding space
-  defp query(%Query{operation: op, name: name, params: params, fields: fields}, _) do
+  defp query(
+         %Query{operation: op, name: name, params: params, fields: fields},
+         _
+       ) do
     [query_intro(op, name), params(params, []), fields(fields, [])]
   end
 

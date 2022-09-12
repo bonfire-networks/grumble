@@ -22,7 +22,7 @@ defmodule Grumble do
     Query,
     Param,
     Type,
-    Var,
+    Var
   }
 
   @type name :: :atom | :binary
@@ -34,15 +34,15 @@ defmodule Grumble do
   @spec field(name :: name, set :: list) :: Field.t()
   def field(name, set \\ []), do: Field.new(name, set)
 
-  @spec fragment_spread(name :: name) :: FragmentSpread.t
+  @spec fragment_spread(name :: name) :: FragmentSpread.t()
   def fragment_spread(name), do: FragmentSpread.new(name)
 
   @spec mutation() :: Query.t()
   @spec mutation(set :: list) :: Query.t()
   def mutation(set \\ []), do: Query.new(:mutation, set)
 
-  @spec object_spread(name :: name) :: ObjectSpread.t
-  @spec object_spread(name :: name, set :: list) :: ObjectSpread.t
+  @spec object_spread(name :: name) :: ObjectSpread.t()
+  @spec object_spread(name :: name, set :: list) :: ObjectSpread.t()
   def object_spread(name, set \\ []), do: ObjectSpread.new(name, set)
 
   @spec param(name :: name, type :: Type.t()) :: Param.t()

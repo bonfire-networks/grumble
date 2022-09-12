@@ -14,7 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 defmodule Grumble.ObjectSpread do
-
   @enforce_keys [:name]
   defstruct [:name, fields: []]
 
@@ -34,6 +33,7 @@ defmodule Grumble.ObjectSpread do
 
   @spec set(query :: t, set :: list) :: t
   def set(%ObjectSpread{} = self, []), do: self
+
   def set(%ObjectSpread{} = self, [{k, v} | set]) do
     set(set(self, k, v), set)
   end
@@ -46,7 +46,11 @@ defmodule Grumble.ObjectSpread do
     %{self | fields: [field | fields]}
   end
 
-  def set(%ObjectSpread{fields: fields} = self, :field, %FragmentSpread{} = field) do
+  def set(
+        %ObjectSpread{fields: fields} = self,
+        :field,
+        %FragmentSpread{} = field
+      ) do
     %{self | fields: [field | fields]}
   end
 
@@ -65,5 +69,4 @@ defmodule Grumble.ObjectSpread do
   def set(%ObjectSpread{} = self, :fields, fields) when is_list(fields) do
     Enum.reduce(fields, self, &set(&2, :field, &1))
   end
-
 end
