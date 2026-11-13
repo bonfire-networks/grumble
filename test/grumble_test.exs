@@ -84,5 +84,21 @@ defmodule GrumbleTest do
 
     test "Query" do
     end
+
+    test "list_type is a list of the named type, with non-null items" do
+      assert "[Cursor!]" == PP.to_string(list_type(:cursor))
+    end
+
+    test "list_type takes a given item type as it is" do
+      assert "[Cursor]" == PP.to_string(list_type(type(:cursor)))
+    end
+
+    test "list_type passes its options to the list" do
+      assert "[Cursor!]!" == PP.to_string(list_type(:cursor, required: true))
+    end
+
+    test "type is not a list" do
+      assert "Cursor" == PP.to_string(type(:cursor))
+    end
   end
 end

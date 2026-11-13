@@ -58,7 +58,11 @@ defmodule Grumble do
 
   @spec list_type(name :: name) :: Type.t()
   @spec list_type(name :: name, set :: list) :: Type.t()
-  def list_type(name, set \\ []), do: Type.new(name, set)
+  # def list_type(name, set \\ []), do: Type.new(name, set)
+  # a list is a `Type` with no name and its item type as `param` (see `Grumble.PP`); a named item type is non-null, as list arguments usually are (`[Cursor!]`), and a given `Type` is used as it is
+  def list_type(item, set \\ [])
+  def list_type(%Type{} = item, set), do: Type.new([], [{:param, item} | set])
+  def list_type(name, set), do: list_type(type!(name), set)
 
   @spec type(name :: name) :: Type.t()
   @spec type(name :: name, set :: list) :: Type.t()
